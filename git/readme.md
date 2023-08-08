@@ -14,6 +14,12 @@ git config --global user.email vik1988kms@gmail.com
 ```bash
 git config --global core.editor emacs
 ```
+##### Добавление алиасов
+```bash
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+```
+После этой команды можно использовать git lg вместо стандартного git log.
+
 ##### Создаем глобальный `.gitignore`
 Cоздаем файл ~/.gitignore_global с содержанием (например):
 ```
@@ -95,12 +101,14 @@ git config --global core.excludesfile ~/.gitignore_global
     * `-d` - простое удаление
     * `-D` - --force удаление. Удаление ветки `<BRANCH>` не смотря ни на что.
   * `git branch -r` - получить список всех веток которые находятся на удалённом репозитории
+  * `git branch --merged` - список всех веток, соединённых с текущей
+  * `git branch --no-merged` - список всех не соединённых с текущей веток.
 
 [git merge](https://git-scm.com/docs/git-merge) `<BRANCH>` - влить в текущую ветку (куда указывает HEAD) с веткой `<BRANCH>`
 
 [git fetch](https://git-scm.com/docs/git-fetch) - получить информацию об изменениях в удалённом репозитории. `git pull = git fetch && git merge <name> <BRANCH>`
 
-[git rebase](https://git-scm.com/docs/git-rebase) `<BRANCH> `- сделать перебазирование текущей ветки поверх ветки `<BRANCH>`
+[git rebase](https://git-scm.com/docs/git-rebase) `<BRANCH> `- сделать перебазирование текущей ветки поверх ветки `<BRANCH>`. Нежелательно использовать в публичных ветвях: он изменяет историю коммитов. Поэтому после rebase’а может возникнуть проблема с push’ем.
 
 [git cherry-pick](https://git-scm.com/docs/git-cherry-pick) `[COMMAND] <hash>` - взять коммит и скопировать его в текущую ветку
   * `--edit` - и поменять сообщение коммита
@@ -109,8 +117,10 @@ git config --global core.excludesfile ~/.gitignore_global
   * `--signoff` - и указать в сообщении коммита имя того пользователя, кто совершил cherry-pick
 
 [git log](https://git-scm.com/docs/git-log) - получить историю коммитов в репозитории
-  * `git log --oneline` - получить историю коммитов в репозитории в виде hash message
+  * `git log --oneline` - каждый коммит в одной строке. Кроме того, она показывает лишь префикс ID коммита.
+  * `git log --oneline --decorate` - Печатает все относительные имена показанных коммитов.
   * `git log --oneline --graph` - тоже самое, но в виде дерева (графа)
+  * `git log --color --pretty=format:"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)" --relative-date --decorate` - можем узнать дату и автора коммита.
 
 [git show](https://git-scm.com/docs/git-show) `<hash>` - показать содержимое коммита
 
