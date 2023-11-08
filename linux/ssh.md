@@ -14,16 +14,13 @@ ssh-keygen
 # Generating public/private rsa key pair.
 # Enter file in which to save the key (/home/vik/.ssh/id_rsa): -можем задать свое имя (по умолчанию id_rsa)
 ```
-Проверяем пары:
+##### Проверяем пары:
 ```bash
 ls -l ~/.ssh 
 #total 8
 #-rw-------. 1 vik vik 1743 Oct 23 12:07 id_rsa
 #-rw-r--r--. 1 vik vik  397 Oct 23 12:07 id_rsa.pub
 ```
-
-ls -l ~/.ssh
-
 
 ##### Подключение с заданным пользователем (без указания юзера будет браться текущий):
 ```bash
